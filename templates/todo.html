@@ -1,0 +1,25 @@
+ <h1>This is the to-do list page.</h1>
+<h2>Maintain your to-do list.</h2>
+
+ <!-- <ul>
+     <li>temporary todo item A.</li>
+     <li>temporary todo item B.</li>
+ </ul> -->
+
+<ul>
+    {% for item in all_items %}
+        <li style="padding-bottom:5px;">To-Do Item : {{item.content}}
+            <form action="/deleteTodo/{{item.id}}/" 
+                    style="display:inline;"
+                    method="POST"> {% csrf_token %}
+                <input type="submit" value="Delete"/>
+            </form>
+        </li>                
+    {% endfor %}
+</ul>
+<br>
+<form action="/addTodo/" method="POST"> {% csrf_token %}    
+        <label>What to-do:</label>
+        <input type="text" name="content" placeholder="Enter to-do item" />
+        <input type="submit" value="Add"/>
+</form>
